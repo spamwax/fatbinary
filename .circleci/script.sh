@@ -64,5 +64,6 @@ cargo build --target x86_64-apple-darwin
 
 SDKROOT=$(xcrun -sdk macosx11.0 --show-sdk-path) MACOSX_DEPLOYMENT_TARGET=$(xcrun -sdk macosx11.0 --show-sdk-platform-version) cargo build --target=aarch64-apple-darwin
 
+
 lipo -create -output universal target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary
 
