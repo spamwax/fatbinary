@@ -17,6 +17,7 @@ jobs:
       CIRCLE_OS_NAME: macos
       GHRELEASER_VERSION: v0.13.0
       CIRCLE_TAG: 0.1.0
+    resource_class: small
     steps:
       - run:
           name: Install Rust
@@ -29,21 +30,18 @@ jobs:
       - run:
           name: Rust Version
           command: rustc --version; cargo --version; rustup --version
-      - when:
-          condition: << parameters.debug >>
-          steps:
-            - checkout
-            - run:
-                name: Building Universal Binary
-                command: |
-                    export BUILD_TYPE=debug
-                    .circleci/script.sh
-            - run:
-                name: Deploying to Github
-                command: |
-                  export CIRCLE_TEST=false
-                  export VERSION=${CIRCLE_TAG}
-                  .circleci/deploy.sh
+      - checkout
+      - run:
+          name: Building Universal Binary
+          command: |
+            export BUILD_TYPE=debug
+            .circleci/script.sh
+      - run:
+          name: Deploying to Github
+          command: |
+           export CIRCLE_TEST=false
+           export VERSION=${CIRCLE_TAG}
+           .circleci/deploy.sh
 
 
 workflows:
@@ -64,5 +62,5 @@ workflows:
           debug: true
           filters:
             branches:
-              only: [master, develop]
+              only: [main, develop]
 
