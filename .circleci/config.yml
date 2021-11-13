@@ -1,0 +1,67 @@
+version: 2.1
+
+jobs:
+  macosimage:
+    parameters:
+      debug:
+        type: boolean
+        default: true
+      rust:
+        type: string
+        default: 1.56.1
+    macos:
+      xcode: "11.3"
+    environment:
+      RUST_BACKTRACE: "1"
+      TARGET: x86_64-apple-darwin
+      CIRCLE_OS_NAME: macos
+      GHRELEASER_VERSION: v0.13.0
+      CIRCLE_TAG: 0.1.0
+    steps:
+      - run:
+          name: Install Rust
+          command: |
+            sudo mkdir /opt
+            curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain << parameters.rust >>
+            rustup target add aarch64-apple-darwin
+            rustup target add x86_64-apple-darwin || echo
+            sudo ln -s ~/.cargo/bin/* /usr/local/bin
+      - run:
+          name: Rust Version
+          command: rustc --version; cargo --version; rustup --version
+      - when:
+          condition: << parameters.debug >>
+          steps:
+            - checkout
+            - run:
+                name: Building Universal Binary
+                command: |
+                    export BUILD_TYPE=debug
+                    .circleci/script.sh
+            - run:
+                name: Deploying to Github
+                command: |
+                  export CIRCLE_TEST=false
+                  export VERSION=${CIRCLE_TAG}
+                  .circleci/deploy.sh
+
+
+workflows:
+  # build-n-test-macos:
+  #   jobs:
+  #     - macosimage:
+  #         name: macOS-64bit
+  #         rust: 1.42.0
+  #         filters:
+  #           branches:
+  #             only: [master, develop]
+  build-universal:
+    jobs:
+      - macosimage:
+          name: macOS-64bit-debug
+          # rust: 1.42.0
+          debug: true
+          filters:
+            branches:
+              only: [master, develop]
+
