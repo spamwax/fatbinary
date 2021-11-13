@@ -55,6 +55,7 @@ workflows:
   #         filters:
   #           branches:
   #             only: [master, develop]
+  version: 2
   build-universal:
     jobs:
       - macosimage:
