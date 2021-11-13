@@ -17,13 +17,17 @@ jobs:
       CIRCLE_OS_NAME: macos
       GHRELEASER_VERSION: v0.13.0
       CIRCLE_TAG: 0.1.0
-    resource_class: small
+    resource_class: medium
     steps:
       - run:
           name: Install Rust
           command: |
             sudo mkdir /opt || echo "/opt exists!"
             curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain << parameters.rust >>
+      - run:
+          name: Add build targets.
+          command: |
+            source $HOME/.cargo/env
             rustup target add aarch64-apple-darwin
             rustup target add x86_64-apple-darwin || echo
             sudo ln -s ~/.cargo/bin/* /usr/local/bin
