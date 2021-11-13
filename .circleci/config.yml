@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Install Rust
           command: |
-            sudo mkdir /opt
+            sudo mkdir /opt || echo "/opt exists!"
             curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain << parameters.rust >>
             rustup target add aarch64-apple-darwin
             rustup target add x86_64-apple-darwin || echo
