@@ -43,14 +43,14 @@ jobs:
           args: --target aarch64-apple-darwin
       - name: Build aarch64-apple-darwin (Release)
         uses: actions-rs/cargo@v1
-        if: ${{ env.GLOBAL != 'true' }}
+        if: ${{ env.GLOBAL == 'true' }}
         with:
           command: build
           args: --release --target aarch64-apple-darwin
 
       - name: Build x86_64-apple-darwin (Debug)
         uses: actions-rs/cargo@v1
-        if: ! ${{ env.GLOBAL == 'true' }}
+        if: ${{ env.GLOBAL != 'true' }}
         with:
           command: build
           args: --target x86_64-apple-darwin
