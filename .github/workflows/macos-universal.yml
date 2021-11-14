@@ -14,7 +14,7 @@ on:
 name: Release alfred-pinboard-rs Workflow
 
 env:
-  if: ${{ github.ref_type == 'tag' }}
+  # if: ${{ github.ref_type == 'tag' }}
   GLOBAL: '--release'
 
 jobs:
@@ -38,6 +38,7 @@ jobs:
       - name: Build aarch64-apple-darwin
         uses: actions-rs/cargo@v1
         with:
+          if: ${{ github.ref_type == 'tag' }}
           command: build
           args: --target aarch64-apple-darwin ${{ format('{0}', env.GLOBAL) }}
       - name: Build x86_64-apple-darwin
