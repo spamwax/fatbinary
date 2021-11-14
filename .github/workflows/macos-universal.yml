@@ -24,40 +24,21 @@ jobs:
           toolchain: 1.56.1
           target: aarch64-apple-darwin
           override: true
+      - name: Build x86_64-apple-darwin
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --target x86_64-apple-darwin
       - name: Set SDKROOT
         run: echo "SDKROOT=$(xcrun -sdk macosx11.1 --show-sdk-path)" >> $GITHUB_ENV
       - name: Set MACOSX_DEPLOYMENT_TARGET
         run: echo "MACOSX_DEPLOYMENT_TARGET=$(xcrun -sdk macosx11.1 --show-sdk-platform-version)" >> $GITHUB_ENV
 #      - name: Setup tmate session
 #        uses: mxschmitt/action-tmate@v2
-      - name: cargo build
+      - name: Build aarch64-apple-darwin
         uses: actions-rs/cargo@v1
         with:
           command: build
           args: --target aarch64-apple-darwin
-  build_x86_64:
-    name: Build x86_64-apple-darwin
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: recursive
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: 1.56.1
-          target: aarch64-apple-darwin
-          override: true
-      # - name: Set SDKROOT
-      #   run: echo "SDKROOT=$(xcrun -sdk macosx11.1 --show-sdk-path)" >> $GITHUB_ENV
-      # - name: Set MACOSX_DEPLOYMENT_TARGET
-      #   run: echo "MACOSX_DEPLOYMENT_TARGET=$(xcrun -sdk macosx11.1 --show-sdk-platform-version)" >> $GITHUB_ENV
-#      - name: Setup tmate session
-#        uses: mxschmitt/action-tmate@v2
-      - name: cargo build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --target x86_64-apple-darwin
       - name: Create fat binary
-        run: ls -la ./* || lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary
+        run: ls -la ./* && lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary && ls -la ./*
