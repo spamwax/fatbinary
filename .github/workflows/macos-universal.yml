@@ -62,7 +62,7 @@ jobs:
     steps:
       - name: "Detect whether the workflow is a release."
         if: ${{ github.ref_type == 'branch' }}
-        run: echo "Y" >> $GITHUB_ENV
+        run: echo "Y=new" >> $GITHUB_ENV
         env:
           RELEASE: 2
       - uses: actions/download-artifact@v2

@@ -5,8 +5,8 @@
 set -ex
 
 echo "Release: =$RELEASE="
-echo "Release: =$FOOK="
-echo "Release: =$GITHUB_ENV="
+echo "Y: =$Y="
+echo "GITHUB_ENV: =$GITHUB_ENV="
 
 lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary
 file ./fatbinary
