@@ -11,7 +11,7 @@ echo "GITHUB_ENV: =$GITHUB_ENV="
 echo "FOOK: =$FOOK="
 echo "GLOBAL: =$GLOBAL="
 
-if [[ "$GLOBAL" = "release" ]]; then
+if [[ "$GLOBAL" = "--release" ]]; then
     lipo -create -output fatbinary target/aarch64-apple-darwin/release/fatbinary target/x86_64-apple-darwin/release/fatbinary
     file ./fatbinary
     chmod u+x ./fatbinary
