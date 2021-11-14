@@ -4,7 +4,9 @@
 # ls -la ./target/x86_64-apple-darwin/debug
 set -ex
 
-echo "$RELEASE"
+echo "Release: =$RELEASE="
+echo "Release: =$FOOK="
+echo "Release: =$GITHUB_ENV="
 
 lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary
 file ./fatbinary
