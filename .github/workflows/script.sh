@@ -4,14 +4,9 @@
 # ls -la ./target/x86_64-apple-darwin/debug
 set -ex
 
-echo "Release: =$RELEASE="
 echo "RELEASE_COMMIT: =$RELEASE_COMMIT="
-echo "Y: =$Y="
-echo "GITHUB_ENV: =$GITHUB_ENV="
-echo "FOOK: =$FOOK="
-echo "GLOBAL: =$GLOBAL="
 
-if [[ "$GLOBAL" = "true" ]]; then
+if [[ "$RELEASE_COMMIT" = "true" ]]; then
     ls -lh ./target/aarch64-apple-darwin/release/fatbinary
     ls -lh ./target/x86_64-apple-darwin/release/fatbinary
     lipo -create -output fatbinary target/aarch64-apple-darwin/release/fatbinary target/x86_64-apple-darwin/release/fatbinary
