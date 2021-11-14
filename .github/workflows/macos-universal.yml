@@ -60,7 +60,7 @@ jobs:
     runs-on: macos-10.15
     needs: build_universal
     steps:
-      - name: "Detect whether the workflow is a release"
+      - name: "Detect whether the workflow is a release."
         if: ${{ github.ref_type == 'branch' }}
         run: echo "Y" >> $GITHUB_ENV && echo "N" >> $FOOK || echo
         env:
