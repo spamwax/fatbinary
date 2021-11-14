@@ -8,6 +8,7 @@ echo "Release: =$RELEASE="
 echo "RELEASE_COMMIT: =$RELEASE_COMMIT="
 echo "Y: =$Y="
 echo "GITHUB_ENV: =$GITHUB_ENV="
+echo "FOOK: =$FOOK="
 
 lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary
 file ./fatbinary

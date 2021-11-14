@@ -21,6 +21,8 @@ jobs:
       - name: "Detect whether the workflow is a release"
         if: ${{ github.ref_type == 'branch' }}
         run: echo "RELEASE_COMMIT=1" >> $GITHUB_ENV
+        env:
+          FOOK: ${{ github.ref_type == 'branch' }}
       - uses: actions/checkout@v2
         with:
           submodules: recursive
