@@ -12,7 +12,7 @@ echo "GITHUB_ENV: =$GITHUB_ENV="
 lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary
 file ./fatbinary
 
-./fatbinary
+[ "$RELEASE_COMMIT" = "true" ] && ./fatbinary
 
 chmod u+x ./fatbinary
 zip fatbinary.zip fatbinary
