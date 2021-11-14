@@ -13,6 +13,9 @@ on:
 
 name: Release alfred-pinboard-rs Workflow
 
+env:
+  GLOBAL: ${{ github.ref_type == 'branch' }}
+
 jobs:
   build_universal:
     name: Build Universal Binary
@@ -77,4 +80,4 @@ jobs:
         with:
           files: fatbinary.zip
       - name: Test Env.
-        run: echo ${{ env.RELEASE }} && echo ${{ env.GITHUB_ENV }}
+        run: echo ${{ env.RELEASE_COMMIT }} && echo ${{ env.GITHUB_ENV }} && echo ${{ env.GLOBAL }}
