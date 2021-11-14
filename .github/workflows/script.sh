@@ -2,9 +2,10 @@
 
 # ls -la ./target/aarch64-apple-darwin/debug
 # ls -la ./target/x86_64-apple-darwin/debug
-set -ex
+# set -ex
 
 echo "Release: =$RELEASE="
+echo "RELEASE_COMMIT: =$RELEASE_COMMIT="
 echo "Y: =$Y="
 echo "GITHUB_ENV: =$GITHUB_ENV="
 
