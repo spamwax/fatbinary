@@ -12,7 +12,7 @@ name: macOS universal
 
 jobs:
   build_aarch64:
-    name: Build aarch64-apple-darwin
+    name: Build Universal Binary
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -41,4 +41,4 @@ jobs:
           command: build
           args: --target aarch64-apple-darwin
       - name: Create fat binary
-        run: ls -la ./* && lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary && ls -la ./*
+        run: .github/workflows/script.sh
