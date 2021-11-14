@@ -32,6 +32,11 @@ jobs:
             rustup target add x86_64-apple-darwin || echo
             sudo ln -s ~/.cargo/bin/* /usr/local/bin
       - run:
+          name: Setup macOS SDK
+          command: |
+            sudo xcode-select -s /Applications/Xcode.app
+            xcodebuild -showsdks
+      - run:
           name: Rust Version
           command: rustc --version; cargo --version; rustup --version
       - checkout
