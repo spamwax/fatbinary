@@ -62,6 +62,7 @@ jobs:
     steps:
       - name: "Detect whether the workflow is a release"
         if: ${{ github.ref_type == 'tag' }}
+        run: echo ""
         env:
           RELEASE: 2
       - uses: actions/download-artifact@v2
