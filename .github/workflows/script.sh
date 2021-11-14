@@ -7,3 +7,6 @@ lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary targe
 file ./fatbinary
 
 ./fatbinary
+
+chmod u+x ./fatbinary
+zip fatbinary.zip fatbinary
