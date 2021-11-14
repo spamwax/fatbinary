@@ -35,6 +35,7 @@ jobs:
           name: Setup macOS SDK
           command: |
             sudo xcode-select -s /Applications/Xcode.app
+            sudo xcode-select --install
             xcodebuild -showsdks
       - run:
           name: Rust Version
