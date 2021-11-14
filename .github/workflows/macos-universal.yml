@@ -75,4 +75,4 @@ jobs:
         with:
           files: fatbinary.zip
       - name: Test Env.
-        run: echo ${{ env.RELEASE }} && echo ${{ env.$GITHUB_ENV }}
+        run: echo ${{ env.RELEASE }} && echo ${{ env.GITHUB_ENV }}
