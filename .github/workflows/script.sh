@@ -11,10 +11,13 @@ echo "GITHUB_ENV: =$GITHUB_ENV="
 echo "FOOK: =$FOOK="
 echo "GLOBAL: =$GLOBAL="
 
-lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary
-file ./fatbinary
+if [[ "$GLOBAL" = "true" ]]; then
+    lipo -create -output fatbinary target/aarch64-apple-darwin/release/fatbinary target/x86_64-apple-darwin/release/fatbinary
+    file ./fatbinary
+    chmod u+x ./fatbinary
+    zip fatbinary.zip fatbinary
+else
+    lipo -create -output fatbinary target/aarch64-apple-darwin/debug/fatbinary target/x86_64-apple-darwin/debug/fatbinary
+    ./fatbinary
+fi
 
-[ "$RELEASE_COMMIT" = "true" ] && ./fatbinary
-
-chmod u+x ./fatbinary
-zip fatbinary.zip fatbinary
