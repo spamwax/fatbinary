@@ -56,7 +56,7 @@ jobs:
           path: fatbinary.zip
 
   release_alfred:
-    name: Download the fat binary
+    name: Release Workflow
     runs-on: macos-10.15
     needs: build_universal
     steps:
